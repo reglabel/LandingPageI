@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Fórum Empresas</title>
+</head>
+
+<body>
+    <ol>
+        {% for i in dados_site %}
+        <h1>{{ i.nome_empresa }}</h1>
+        <p>{{ i.texto_sobre }}</p>
+
+        <a target="_blank" href="{{ i.whatsapp }}">Clique aqui para falar comigo<br></a>
+        <a target="_blank" href="{{ i.localizacao }}">Clique aqui para me encontrar</a>
+        
+        <h3>Produtos exclusivos!</h3>
+
+        <ol>
+            {% for j in lista_produtos %}
+            {% if j.empresa.id == i.id%}
+            {% if j.nome_produto != "NADA" %}
+            <li>{{ j.nome_produto }}</li>
+            <p>{{ j.descricao }}</p>
+            <p>R${{ j.preco_venda }}</p>
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+        </ol>
+        
+        <h3>Conheça nossos clientes!</h3>
+
+        <ol>
+            {% for r in lista_pessoas %}
+            {% if r.empresa.id == i.id%}
+            {% if r.listagem %}
+            <li>{{ r.nome_pessoa }}</li>
+            <p>{{ r.email }}</p>
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+        </ol>
+
+        {% endfor %}
+    </ol>
+    
+    
+    
+</body>
+
+</html>
